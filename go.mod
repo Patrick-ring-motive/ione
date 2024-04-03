@@ -2,4 +2,9 @@ module github.com/Patrick-ring-motive/ione
 
 go 1.21.5
 
-require github.com/Patrick-ring-motive/utils v0.0.0-20240305210412-adfa7fb2bc33
+require github.com/Patrick-ring-motive/utils v0.0.0-20240318150730-fe258b7060a9
+
+require (
+	github.com/Patrick-ring-motive/deferrable v0.0.0-20240305173137-1b9086e4accc // indirect
+	github.com/Patrick-ring-motive/traigo v0.0.0-20240305194605-b1fd241ff6ff // indirect
+)
