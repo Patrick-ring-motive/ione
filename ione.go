@@ -2,7 +2,7 @@ package ione
 
 import (
 	"fmt"
-	. "github.com/Patrick-ring-motive/traigo"
+//	. "github.com/Patrick-ring-motive/traigo"
 	"io"
 )
 
