@@ -16,7 +16,7 @@ type IoReadCloser struct {
 	Value *io.ReadCloser
 }
 
-func IoReadAll(ioReadCloser IoReadCloser, options ...IoOptions) []byte {
+func IoReadAll(ioReadCloser *IoReadCloser, options ...IoOptions) []byte {
 
 	var bytes []byte
   var b [1][]byte = [1][]byte{}
@@ -25,7 +25,7 @@ func IoReadAll(ioReadCloser IoReadCloser, options ...IoOptions) []byte {
 	return bytes
 }
 
-func ioReadAll(b [1][]byte, ioReadCloser IoReadCloser, options ...IoOptions){
+func ioReadAll(b [1][]byte, ioReadCloser *IoReadCloser, options ...IoOptions){
   ioNoNil := true
   ioNoError := true
   ioNoPanic := true
