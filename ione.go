@@ -47,7 +47,7 @@ func IoReadAll(ioReadCloser *IoReadCloser, options ...IoOptions) []byte {
 	return bytes
 }
 
-func Io_ReadAll(ioReadCloser *io.ReadCloser, options ...IoOptions) []byte {
+func Io_ReadAll(ioReadCloser io.ReadCloser, options ...IoOptions) []byte {
   ioNoNil := true
   ioNoError := true
   ioNoPanic := true
@@ -58,7 +58,7 @@ func Io_ReadAll(ioReadCloser *io.ReadCloser, options ...IoOptions) []byte {
   }
   var bytes []byte
   Try(func() {
-    bytes, err := io.ReadAll(*ioReadCloser)
+    bytes, err := io.ReadAll(ioReadCloser)
     if (bytes == nil) && (err == nil) && ioNoNil {
       fmt.Println("IoReadAll nil")
       bytes = []byte("IoReadAll nil")
