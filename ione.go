@@ -13,7 +13,7 @@ type IoOptions struct {
 }
 
 type IoReadCloser struct {
-	Value *io.ReadCloser
+	Value io.ReadCloser
 }
 
 func IoReadAll(ioReadCloser *IoReadCloser, options ...IoOptions) []byte {
@@ -41,7 +41,7 @@ func ioReadAll(b [1][]byte, ioReadCloser *IoReadCloser, options ...IoOptions){
       }
     }()
   }
-  bytes, err := io.ReadAll(*ioReadCloser.Value)
+  bytes, err := io.ReadAll(ioReadCloser.Value)
   if (bytes == nil) && (err == nil) && ioNoNil {
     fmt.Println("IoReadAll nil")
     bytes = []byte("IoReadAll nil")
