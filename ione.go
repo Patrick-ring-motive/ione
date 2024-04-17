@@ -19,14 +19,14 @@ type IoReadCloser struct {
 func IoReadAll(ioReadCloser *IoReadCloser, options ...IoOptions) []byte {
 	ioNoNil := true
 	ioNoError := true
-	ioNoPanic := true
+	//ioNoPanic := true
 	if len(options) > 0 {
 		ioNoNil = options[0].IoNoNil
 		ioNoError = options[0].IoNoError
-		ioNoPanic = options[0].IoNoPanic
+	//	ioNoPanic = options[0].IoNoPanic
 	}
 	var bytes []byte
-	Try(func() {
+//	Try(func() {
 		bytes, err := io.ReadAll(*ioReadCloser.Value)
 		if (bytes == nil) && (err == nil) && ioNoNil {
 			fmt.Println("IoReadAll nil")
@@ -36,14 +36,14 @@ func IoReadAll(ioReadCloser *IoReadCloser, options ...IoOptions) []byte {
 			fmt.Println("IoReadAll error: ", err.Error())
 			bytes = []byte(fmt.Sprint("IoReadAll error: ", err.Error()))
 		}
-	}, Catch(func(e interface{}) {
+/*	}, Catch(func(e interface{}) {
 		if ioNoPanic {
 			fmt.Println("IoReadAll panic: ", e)
 			bytes = []byte(fmt.Sprint("IoReadAll panic: ", e))
 		} else {
 			panic(e)
 		}
-	}))
+	}))*/
 	return bytes
 }
 
