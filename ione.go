@@ -16,7 +16,7 @@ type IoReadCloser struct {
 	Value *io.ReadCloser
 }
 
-func IoReadAll(ioReadCloser IoReadCloser, options ...IoOptions) []byte {
+func IoReadAll(ioReadCloser *IoReadCloser, options ...IoOptions) []byte {
 	ioNoNil := true
 	ioNoError := true
 	ioNoPanic := true
