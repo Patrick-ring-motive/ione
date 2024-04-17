@@ -19,7 +19,7 @@ type IoReadCloser struct {
 func IoReadAll(ioReadCloser *IoReadCloser, options ...IoOptions) []byte {
 
 	var bytes []byte
-  var b [1][]byte = [1][]byte{}
+  var b [1][]byte = [1][]byte{[]byte("IoReadAll initial value")}
   ioReadAll(b, ioReadCloser, options...)
   bytes = b[0]
 	return bytes
