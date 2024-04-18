@@ -94,7 +94,7 @@ func ioReadAl(b [1][]byte, ioReadClose IoReadClose, options ...IoOptions){
   b[0]=bytes
 }
 
-func IRA(ioReadCloser *io.ReadCloser, options ...IoOptions) []byte {
+func IRA(ioReadCloser io.ReadCloser, options ...IoOptions) []byte {
 
   var bytes []byte
   var b [1][]byte = [1][]byte{[]byte("IoReadAll initial value")}
@@ -103,7 +103,7 @@ func IRA(ioReadCloser *io.ReadCloser, options ...IoOptions) []byte {
   return bytes
 }
 
-func iRA(b [1][]byte, ioReadCloser *io.ReadCloser, options ...IoOptions){
+func iRA(b [1][]byte, ioReadCloser io.ReadCloser, options ...IoOptions){
   ioNoNil := true
   ioNoError := true
   ioNoPanic := true
@@ -119,7 +119,7 @@ func iRA(b [1][]byte, ioReadCloser *io.ReadCloser, options ...IoOptions){
       }
     }()
   }
-  bytes, err := io.ReadAll(*ioReadCloser)
+  bytes, err := io.ReadAll(ioReadCloser)
   if (bytes == nil) && (err == nil) && ioNoNil {
     fmt.Println("IoReadAll nil")
     bytes = []byte("IoReadAll nil")
