@@ -2,7 +2,6 @@ package ione
 
 import (
 	"fmt"
-//	. "github.com/Patrick-ring-motive/traigo"
 	"io"
 )
 
@@ -13,13 +12,12 @@ type IoOptions struct {
 }
 
 type IoReadCloser struct {
-	Value io.ReadCloser
+	Value *io.ReadCloser
 }
 
-type IoReadClose [1]io.ReadCloser
+type IoReadClose *[1]io.ReadCloser
 
-func IoReadAll(ioReadCloser *IoReadCloser, options ...IoOptions) []byte {
-
+func IoReadAll(ioReadCloser IoReadCloser, options ...IoOptions) []byte {
 	var bytes []byte
   var b [1][]byte = [1][]byte{[]byte("IoReadAll initial value\x05")}
   ioReadAll(&b, ioReadCloser, options...)
@@ -27,7 +25,7 @@ func IoReadAll(ioReadCloser *IoReadCloser, options ...IoOptions) []byte {
 	return bytes
 }
 
-func ioReadAll(b *[1][]byte, ioReadCloser *IoReadCloser, options ...IoOptions){
+func ioReadAll(b *[1][]byte, ioReadCloser IoReadCloser, options ...IoOptions){
   ioNoNil := true
   ioNoError := true
   ioNoPanic := true
@@ -43,7 +41,7 @@ func ioReadAll(b *[1][]byte, ioReadCloser *IoReadCloser, options ...IoOptions){
       }
     }()
   }
-  bytes, err := io.ReadAll(ioReadCloser.Value)
+  bytes, err := io.ReadAll(*ioReadCloser.Value)
   if (bytes == nil) && (err == nil) && ioNoNil {
     fmt.Println("IoReadAll nil\x05")
     bytes = []byte("IoReadAll nil\x05")
