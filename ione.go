@@ -21,13 +21,13 @@ type IoReadClose [1]io.ReadCloser
 func IoReadAll(ioReadCloser *IoReadCloser, options ...IoOptions) []byte {
 
 	var bytes []byte
-  var b [1][]byte = [1][]byte{[]byte("IoReadAll initial value")}
-  ioReadAll(b, ioReadCloser, options...)
+  var b [1][]byte = [1][]byte{[]byte("IoReadAll initial value\x05")}
+  ioReadAll(&b, ioReadCloser, options...)
   bytes = b[0]
 	return bytes
 }
 
-func ioReadAll(b [1][]byte, ioReadCloser *IoReadCloser, options ...IoOptions){
+func ioReadAll(b *[1][]byte, ioReadCloser *IoReadCloser, options ...IoOptions){
   ioNoNil := true
   ioNoError := true
   ioNoPanic := true
@@ -39,18 +39,18 @@ func ioReadAll(b [1][]byte, ioReadCloser *IoReadCloser, options ...IoOptions){
   if ioNoPanic {
     defer func() {
       if r := recover(); r != nil {
-        b[0] = []byte(fmt.Sprint("IoReadAll panic: ", r))
+        b[0] = []byte(fmt.Sprint("IoReadAll panic: ", r,"\x05"))
       }
     }()
   }
   bytes, err := io.ReadAll(ioReadCloser.Value)
   if (bytes == nil) && (err == nil) && ioNoNil {
-    fmt.Println("IoReadAll nil")
-    bytes = []byte("IoReadAll nil")
+    fmt.Println("IoReadAll nil\x05")
+    bytes = []byte("IoReadAll nil\x05")
   }
   if (err != nil) && ioNoError {
     fmt.Println("IoReadAll error: ", err.Error())
-    bytes = []byte(fmt.Sprint("IoReadAll error: ", err.Error()))
+    bytes = []byte(fmt.Sprint("IoReadAll error: ", err.Error(),"\x05"))
   }
   b[0]=bytes
 }
