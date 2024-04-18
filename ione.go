@@ -95,12 +95,11 @@ func ioReadAl(b [1][]byte, ioReadClose IoReadClose, options ...IoOptions){
 }
 
 func IRA(ioReadCloser io.ReadCloser, options ...IoOptions) []byte {
-
   var bytes []byte
   var b [1][]byte = [1][]byte{[]byte("IoReadAll initial value")}
   iRA(b, ioReadCloser, options...)
   bytes = b[0]
-  fmt.Println("IRA",bytes)
+  fmt.Println("IRA",string(bytes))
   return bytes
 }
 
@@ -121,14 +120,17 @@ func iRA(b [1][]byte, ioReadCloser io.ReadCloser, options ...IoOptions){
     }()
   }
   bytes, err := io.ReadAll(ioReadCloser)
-  fmt.Println("iRA",bytes)
+  b[0]=bytes
+  fmt.Println("iRA",string(bytes))
   if (bytes == nil) && (err == nil) && ioNoNil {
     fmt.Println("IoReadAll nil")
     bytes = []byte("IoReadAll nil")
+    b[0]=bytes
   }
   if (err != nil) && ioNoError {
     fmt.Println("IoReadAll error: ", err.Error())
     bytes = []byte(fmt.Sprint("IoReadAll error: ", err.Error()))
+    b[0]=bytes
   }
-  b[0]=bytes
+  
 }
