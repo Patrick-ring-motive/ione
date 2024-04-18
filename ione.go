@@ -97,13 +97,13 @@ func ioReadAl(b [1][]byte, ioReadClose IoReadClose, options ...IoOptions){
 func IRA(ioReadCloser io.ReadCloser, options ...IoOptions) []byte {
   var bytes []byte
   var b [1][]byte = [1][]byte{[]byte("IoReadAll initial value\x05")}
-  iRA(b, ioReadCloser, options...)
+  iRA(&b, ioReadCloser, options...)
   bytes = b[0]
   fmt.Println("IRA",string(bytes))
   return bytes
 }
 
-func iRA(b [1][]byte, ioReadCloser io.ReadCloser, options ...IoOptions){
+func iRA(b *[1][]byte, ioReadCloser io.ReadCloser, options ...IoOptions){
   ioNoNil := true
   ioNoError := true
   ioNoPanic := true
