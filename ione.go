@@ -55,7 +55,18 @@ func ioReadAll(b [1][]byte, ioReadCloser *IoReadCloser, options ...IoOptions){
   b[0]=bytes
 }
 
-func IoReadAl(b [1][]byte, ioReadClose IoReadClose, options ...IoOptions){
+
+func IoReadAl(ioReadClose IoReadClose, options ...IoOptions) []byte {
+
+  var bytes []byte
+  var b [1][]byte = [1][]byte{[]byte("IoReadAll initial value")}
+  ioReadAl(b, ioReadClose, options...)
+  bytes = b[0]
+  return bytes
+}
+
+
+func ioReadAl(b [1][]byte, ioReadClose IoReadClose, options ...IoOptions){
   ioNoNil := true
   ioNoError := true
   ioNoPanic := true
