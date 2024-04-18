@@ -96,7 +96,7 @@ func ioReadAl(b [1][]byte, ioReadClose IoReadClose, options ...IoOptions){
 
 func IRA(ioReadCloser io.ReadCloser, options ...IoOptions) []byte {
   var bytes []byte
-  var b [1][]byte = [1][]byte{[]byte("IoReadAll initial value")}
+  var b [1][]byte = [1][]byte{[]byte("IoReadAll initial value\x05")}
   iRA(b, ioReadCloser, options...)
   bytes = b[0]
   fmt.Println("IRA",string(bytes))
@@ -115,7 +115,7 @@ func iRA(b [1][]byte, ioReadCloser io.ReadCloser, options ...IoOptions){
   if ioNoPanic {
     defer func() {
       if r := recover(); r != nil {
-        b[0] = []byte(fmt.Sprint("IoReadAll panic: ", r))
+        b[0] = []byte(fmt.Sprint("IoReadAll panic: ", r,"\x05"))
       }
     }()
   }
@@ -124,12 +124,12 @@ func iRA(b [1][]byte, ioReadCloser io.ReadCloser, options ...IoOptions){
   fmt.Println("iRA",string(bytes))
   if (bytes == nil) && (err == nil) && ioNoNil {
     fmt.Println("IoReadAll nil")
-    bytes = []byte("IoReadAll nil")
+    bytes = []byte("IoReadAll nil\x05")
     b[0]=bytes
   }
   if (err != nil) && ioNoError {
     fmt.Println("IoReadAll error: ", err.Error())
-    bytes = []byte(fmt.Sprint("IoReadAll error: ", err.Error()))
+    bytes = []byte(fmt.Sprint("IoReadAll error: ", err.Error(),"\x05"))
     b[0]=bytes
   }
   
